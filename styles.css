@@ -267,21 +267,7 @@ body {
     margin-bottom: 1rem;
 }
 
-.add-to-cart {
-    width: 100%;
-    padding: 0.8rem;
-    background: #3498db;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: 600;
-    transition: background 0.3s ease;
-}
 
-.add-to-cart:hover {
-    background: #2980b9;
-}
 
 /* 关于我们样式 */
 .about-section {
@@ -307,6 +293,8 @@ body {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 2rem;
+    height: 100%;
+    min-height: 18rem;
 }
 
 .stat-item {
@@ -315,6 +303,7 @@ body {
     background: #f8f9fa;
     border-radius: 15px;
     transition: transform 0.3s ease;
+    white-space: nowrap;
 }
 
 .stat-item:hover {

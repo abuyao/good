@@ -158,24 +158,9 @@ function createProductCard(product) {
             <h3 class="product-title">${product.name}</h3>
             <p class="product-description">${product.description}</p>
             <div class="product-price">${product.price}</div>
-            <button class="add-to-cart" onclick="addToCart(${product.id})">
-                加入购物车
-            </button>
         </div>
     `;
     return card;
-}
-
-// 加入购物车功能
-function addToCart(productId) {
-    const product = products.find(p => p.id === productId);
-    if (product) {
-        // 创建提示消息
-        showNotification(`已将 ${product.name} 加入购物车！`);
-        
-        // 这里可以添加实际的购物车逻辑
-        console.log(`商品 ${product.name} 已加入购物车`);
-    }
 }
 
 // 显示通知
@@ -301,31 +286,6 @@ function searchProducts(query) {
         const productCard = createProductCard(product);
         productsGrid.appendChild(productCard);
     });
-}
-
-// 购物车功能（基础版本）
-let cart = [];
-
-function addToCart(productId) {
-    const product = products.find(p => p.id === productId);
-    if (product) {
-        const existingItem = cart.find(item => item.id === productId);
-        if (existingItem) {
-            existingItem.quantity += 1;
-        } else {
-            cart.push({
-                ...product,
-                quantity: 1
-            });
-        }
-        showNotification(`已将 ${product.name} 加入购物车！`);
-        updateCartDisplay();
-    }
-}
-
-function updateCartDisplay() {
-    // 这里可以添加购物车图标和数量显示
-    console.log('购物车更新:', cart);
 }
 
 // 页面加载完成后的额外初始化
