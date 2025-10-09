@@ -6,8 +6,7 @@ const products = [
         description: "3 ton forklift, commission 5000 ghc, second hand",
         price: "$11000",
         category: "forklift",
-        image: "forklift1.jpg",
-        video: "forklift1.mp4"
+        images: ["forklift30-1.jpg"]
     },
     {
         id: 2,
@@ -15,7 +14,8 @@ const products = [
         description: "3.5 ton forklift, commission 5000 ghc, second hand",
         price: "$15000",
         category: "forklift",
-        image: "forklift2.jpg"
+        images: ["forklift35-1.jpg", "forklift35-2.jpg"],
+        videos: ["forklift35-1.mp4"]
     },
     {
         id: 3,
@@ -23,7 +23,7 @@ const products = [
         description: "5 ton forklift, commission 6000 ghc, second hand",
         price: "$20000",
         category: "forklift",
-        image: "forklift3.jpg"
+        images: ["forklift50-1.jpg", "forklift50-2.jpg", "forklift50-3.jpg"]
     },
     {
         id: 4,
@@ -31,7 +31,7 @@ const products = [
         description: "excavator 21.5ton, commission 5000us$, new brand Liugong",
         price: "$139000",
         category: "excavator",
-        image: "forklift4.jpg"
+        images: ["excavator215-1.jpg", "excavator215-2.jpg", "excavator215-3.jpg", "excavator215-4.jpg"]
     },
     {
         id: 5,
@@ -39,7 +39,7 @@ const products = [
         description: "excavator 25ton, commission 10000 ghc, second hand in Ghana",
         price: "$40000",
         category: "excavator",
-        image: "forklift5.jpg"
+        images: ["excavator250-1.jpg"]
     },
     {
         id: 6,
@@ -47,7 +47,7 @@ const products = [
         description: "excavator 35ton, commission 10000 ghc, second hand in Ghana",
         price: "$44000",
         category: "excavator",
-        image: "forklift1.jpg"
+        images: ["excavator350-1.jpg"]
     },
     {
         id: 7,
@@ -55,7 +55,7 @@ const products = [
         description: "tricycle, commission 1200 ghc, for transportation ",
         price: "$2380",
         category: "tricycle",
-        image: "forklift2.jpg"
+        images: ["tricycle1-1.jpg", "tricycle1-2.jpg"]
     },
     {
         id: 8,
@@ -63,7 +63,7 @@ const products = [
         description: "tricycle, commission 1200 ghc, for passengers ",
         price: "$2380",
         category: "tricycle",
-        image: "forklift3.jpg"
+        images: ["tricycle2-1.jpg", "tricycle2-2.jpg", "tricycle2-3.jpg"]
     }
 ];
 
@@ -144,17 +144,73 @@ function createProductCard(product) {
     const card = document.createElement('div');
     card.className = 'product-card';
     
-    // 构建媒体内容
+    // 构建媒体列表
+    let mediaItems = [];
+    
+    // 添加图片
+    if (product.images) {
+        product.images.forEach(image => {   
+        mediaItems.push({
+            type: 'image',
+                src: image,
+                alt: product.name
+            });
+        });
+    }
+    
+    // 添加视频
+    if (product.videos) {
+        product.videos.forEach(video => {
+            mediaItems.push({
+                type: 'video',
+                src: video,
+                poster: product.image
+            });
+        });
+    }
+    
+    // 构建媒体轮播
     let mediaContent = '';
-    if (product.video) {
+    if (mediaItems.length > 1) {
+        // 多个媒体文件，创建轮播
         mediaContent = `
-            <video class="product-media" controls poster="${product.image}" preload="metadata">
-                <source src="${product.video}" type="video/mp4">
-                <img src="${product.image}" alt="${product.name}" class="product-fallback">
-            </video>
+            <div class="media-carousel">
+                <div class="media-container">
+                    ${mediaItems.map((item, index) => {
+                        if (item.type === 'image') {
+                            return `<img src="${item.src}" alt="${item.alt}" class="media-item ${index === 0 ? 'active' : ''}" loading="lazy">`;
+                        } else {
+                            return `<video class="media-item ${index === 0 ? 'active' : ''}" controls poster="${item.poster}" preload="metadata">
+                                <source src="${item.src}" type="video/mp4">
+                            </video>`;
+                        }
+                    }).join('')}
+                </div>
+                <div class="media-controls">
+                    <button class="media-prev" onclick="changeMedia(this, -1)">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button class="media-next" onclick="changeMedia(this, 1)">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+                <div class="media-indicators">
+                    ${mediaItems.map((_, index) => 
+                        `<span class="indicator ${index === 0 ? 'active' : ''}" onclick="goToMedia(this, ${index})"></span>`
+                    ).join('')}
+                </div>
+            </div>
         `;
-    } else {
-        mediaContent = `<img src="${product.image}" alt="${product.name}" class="product-media" loading="lazy">`;
+    } else if (mediaItems.length === 1) {
+        // 单个媒体文件
+        const item = mediaItems[0];
+        if (item.type === 'image') {
+            mediaContent = `<img src="${item.src}" alt="${item.alt}" class="product-media" loading="lazy">`;
+        } else {
+            mediaContent = `<video class="product-media" controls poster="${item.poster}" preload="metadata">
+                <source src="${item.src}" type="video/mp4">
+            </video>`;
+        }
     }
     
     card.innerHTML = `
@@ -170,21 +226,32 @@ function createProductCard(product) {
     
     // 添加媒体加载处理
     const productImage = card.querySelector('.product-image');
-    const media = card.querySelector('.product-media');
+    const mediaElements = card.querySelectorAll('.media-item, .product-media');
     
-    if (media) {
+    if (mediaElements.length > 0) {
         // 显示加载状态
         productImage.classList.add('loading');
         
-        // 媒体加载完成
-        media.addEventListener('load', () => {
-            productImage.classList.remove('loading');
-        });
+        let loadedCount = 0;
+        const totalMedia = mediaElements.length;
         
-        // 媒体加载错误处理
-        media.addEventListener('error', () => {
-            productImage.classList.remove('loading');
-            console.warn(`Failed to load media for product: ${product.name}`);
+        mediaElements.forEach(media => {
+            // 媒体加载完成
+            media.addEventListener('load', () => {
+                loadedCount++;
+                if (loadedCount === totalMedia) {
+                    productImage.classList.remove('loading');
+                }
+            });
+            
+            // 媒体加载错误处理
+            media.addEventListener('error', () => {
+                loadedCount++;
+                if (loadedCount === totalMedia) {
+                    productImage.classList.remove('loading');
+                }
+                console.warn(`Failed to load media for product: ${product.name}`);
+            });
         });
     }
     
@@ -238,14 +305,14 @@ function handleFormSubmit(e) {
     const email = e.target.querySelector('input[type="email"]').value;
     const message = e.target.querySelector('textarea').value;
     
-    // 简单的表单验证
+    // Simple form validation
     if (!name || !email || !message) {
-        showNotification('请填写所有必填字段！', 'error');
+        showNotification('Please fill in all required fields!', 'error');
         return;
     }
     
-    // 模拟表单提交
-    showNotification('消息已发送！我们会尽快回复您。');
+    // Simulate form submission
+    showNotification('Message sent! We will reply to you as soon as possible.');
     e.target.reset();
 }
 
@@ -316,6 +383,66 @@ function searchProducts(query) {
     });
 }
 
+// 媒体轮播控制函数
+function changeMedia(button, direction) {
+    const carousel = button.closest('.media-carousel');
+    const container = carousel.querySelector('.media-container');
+    const items = carousel.querySelectorAll('.media-item');
+    const indicators = carousel.querySelectorAll('.indicator');
+    
+    let currentIndex = 0;
+    items.forEach((item, index) => {
+        if (item.classList.contains('active')) {
+            currentIndex = index;
+        }
+    });
+    
+    // 计算下一个索引
+    let nextIndex = currentIndex + direction;
+    if (nextIndex < 0) {
+        nextIndex = items.length - 1;
+    } else if (nextIndex >= items.length) {
+        nextIndex = 0;
+    }
+    
+    // 更新显示
+    items[currentIndex].classList.remove('active');
+    items[nextIndex].classList.add('active');
+    indicators[currentIndex].classList.remove('active');
+    indicators[nextIndex].classList.add('active');
+    
+    // 暂停当前视频
+    const currentVideo = items[currentIndex].querySelector('video');
+    if (currentVideo) {
+        currentVideo.pause();
+    }
+}
+
+// 跳转到指定媒体
+function goToMedia(indicator, index) {
+    const carousel = indicator.closest('.media-carousel');
+    const items = carousel.querySelectorAll('.media-item');
+    const indicators = carousel.querySelectorAll('.indicator');
+    
+    // 移除所有活动状态
+    items.forEach(item => item.classList.remove('active'));
+    indicators.forEach(ind => ind.classList.remove('active'));
+    
+    // 设置新的活动状态
+    items[index].classList.add('active');
+    indicator.classList.add('active');
+    
+    // 暂停其他视频
+    items.forEach((item, i) => {
+        if (i !== index) {
+            const video = item.querySelector('video');
+            if (video) {
+                video.pause();
+            }
+        }
+    });
+}
+
 // 页面加载完成后的额外初始化
 window.addEventListener('load', function() {
     // 添加页面加载动画
@@ -325,4 +452,55 @@ window.addEventListener('load', function() {
     setTimeout(() => {
         document.body.style.opacity = '1';
     }, 100);
-}); 
+    
+    // 添加触摸滑动支持
+    addTouchSupport();
+});
+
+// 添加触摸滑动支持
+function addTouchSupport() {
+    document.querySelectorAll('.media-carousel').forEach(carousel => {
+        let startX = 0;
+        let startY = 0;
+        let isScrolling = false;
+        
+        carousel.addEventListener('touchstart', (e) => {
+            startX = e.touches[0].clientX;
+            startY = e.touches[0].clientY;
+            isScrolling = false;
+        });
+        
+        carousel.addEventListener('touchmove', (e) => {
+            if (!startX || !startY) return;
+            
+            const currentX = e.touches[0].clientX;
+            const currentY = e.touches[0].clientY;
+            const diffX = startX - currentX;
+            const diffY = startY - currentY;
+            
+            if (Math.abs(diffX) > Math.abs(diffY)) {
+                isScrolling = true;
+                e.preventDefault();
+            }
+        });
+        
+        carousel.addEventListener('touchend', (e) => {
+            if (!isScrolling) return;
+            
+            const endX = e.changedTouches[0].clientX;
+            const diffX = startX - endX;
+            
+            if (Math.abs(diffX) > 50) { // 最小滑动距离
+                if (diffX > 0) {
+                    // 向左滑动，显示下一个
+                    const nextBtn = carousel.querySelector('.media-next');
+                    if (nextBtn) changeMedia(nextBtn, 1);
+                } else {
+                    // 向右滑动，显示上一个
+                    const prevBtn = carousel.querySelector('.media-prev');
+                    if (prevBtn) changeMedia(prevBtn, -1);
+                }
+            }
+        });
+    });
+} 

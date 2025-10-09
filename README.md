@@ -1,110 +1,112 @@
-# 精品商城 - 静态商品展示网站
+# Premium Store - Static Product Showcase Website
 
-一个现代化的静态商品展示网站，采用响应式设计，提供美观的用户界面和流畅的交互体验。
+A modern static product showcase website with responsive design, providing beautiful user interface and smooth interactive experience.
 
-## 🌟 功能特性
+## 🌟 Features
 
-### 主要功能
-- **响应式设计** - 完美适配桌面端、平板和移动设备
-- **商品展示** - 美观的商品卡片布局，支持分类筛选
-- **交互体验** - 平滑滚动、动画效果和悬停交互
-- **移动端优化** - 汉堡菜单和触摸友好的界面
-- **联系表单** - 完整的联系表单功能
-- **购物车功能** - 基础的商品添加和通知系统
+### Main Features
+- **Responsive Design** - Perfect adaptation for desktop, tablet and mobile devices
+- **Product Display** - Beautiful product card layout with category filtering
+- **Interactive Experience** - Smooth scrolling, animations and hover effects
+- **Mobile Optimization** - Hamburger menu and touch-friendly interface
+- **Contact Form** - Complete contact form functionality
+- **Media Gallery** - Image and video carousel with swipe support
 
-### 技术特性
-- **纯静态网站** - 无需服务器，可直接部署到任何静态托管服务
-- **现代化UI** - 使用CSS Grid、Flexbox和现代CSS特性
-- **性能优化** - 轻量级代码，快速加载
-- **SEO友好** - 语义化HTML结构
-- **无障碍访问** - 符合Web可访问性标准
+### Technical Features
+- **Pure Static Website** - No server required, can be deployed to any static hosting service
+- **Modern UI** - Using CSS Grid, Flexbox and modern CSS features
+- **Performance Optimized** - Lightweight code with fast loading
+- **SEO Friendly** - Semantic HTML structure
+- **Accessibility** - Compliant with web accessibility standards
 
-## 📁 项目结构
+## 📁 Project Structure
 
 ```
 good/
-├── index.html          # 主页面
-├── styles.css          # 样式文件
-├── script.js           # JavaScript功能
-└── README.md           # 项目说明
+├── index.html          # Main page
+├── styles.css          # Style file
+├── script.js           # JavaScript functionality
+├── customer-service.html # Customer service page
+└── README.md           # Project documentation
 ```
 
-## 🚀 快速开始
+## 🚀 Quick Start
 
-### 本地运行
-1. 克隆或下载项目文件
-2. 直接在浏览器中打开 `index.html` 文件
-3. 或者使用本地服务器：
+### Local Development
+1. Clone or download project files
+2. Open `index.html` directly in browser
+3. Or use a local server:
    ```bash
-   # 使用Python
+   # Using Python
    python -m http.server 8000
    
-   # 使用Node.js
+   # Using Node.js
    npx serve .
    ```
 
-### 部署到网络
-- **GitHub Pages**: 将文件推送到GitHub仓库，启用Pages服务
-- **Netlify**: 拖拽文件夹到Netlify进行部署
-- **Vercel**: 连接GitHub仓库自动部署
-- **任何静态托管服务**: 上传文件即可
+### Deploy to Web
+- **GitHub Pages**: Push files to GitHub repository and enable Pages service
+- **Netlify**: Drag and drop folder to Netlify for deployment
+- **Vercel**: Connect GitHub repository for automatic deployment
+- **Any Static Hosting Service**: Upload files directly
 
-## 🎨 自定义配置
+## 🎨 Customization
 
-### 修改商品数据
-在 `script.js` 文件中编辑 `products` 数组：
+### Modify Product Data
+Edit the `products` array in `script.js` file:
 
 ```javascript
 const products = [
     {
         id: 1,
-        name: "商品名称",
-        description: "商品描述",
-        price: "¥价格",
-        category: "分类",
-        icon: "图标"
+        name: "Product Name",
+        description: "Product Description",
+        price: "$Price",
+        category: "Category",
+        images: ["image1.jpg", "image2.jpg"],
+        videos: ["video1.mp4"]
     },
-    // 添加更多商品...
+    // Add more products...
 ];
 ```
 
-### 修改样式
-- 主色调：修改CSS中的 `#3498db` 颜色值
-- 字体：更改 `body` 的 `font-family` 属性
-- 布局：调整 `.container` 的 `max-width` 值
+### Modify Styles
+- Main color: Change `#3498db` color value in CSS
+- Font: Change `font-family` property of `body`
+- Layout: Adjust `max-width` value of `.container`
 
-### 添加新功能
-- 搜索功能：取消注释 `searchProducts` 函数
-- 购物车页面：扩展购物车功能
-- 商品详情页：创建新的HTML页面
+### Add New Features
+- Search function: Uncomment `searchProducts` function
+- Shopping cart page: Extend shopping cart functionality
+- Product detail page: Create new HTML pages
 
-## 📱 响应式断点
+## 📱 Responsive Breakpoints
 
-- **桌面端**: 1200px+
-- **平板**: 768px - 1199px
-- **手机**: 767px以下
+- **Desktop**: 1200px+
+- **Tablet**: 768px - 1199px
+- **Mobile**: 767px and below
 
-## 🛠️ 技术栈
+## 🛠️ Tech Stack
 
-- **HTML5** - 语义化标记
-- **CSS3** - 现代样式和动画
-- **JavaScript (ES6+)** - 交互功能
-- **Font Awesome** - 图标库
+- **HTML5** - Semantic markup
+- **CSS3** - Modern styles and animations
+- **JavaScript (ES6+)** - Interactive functionality
+- **Font Awesome** - Icon library
 
-## 📄 许可证
+## 📄 License
 
-MIT License - 可自由使用和修改
+MIT License - Free to use and modify
 
-## 🤝 贡献
+## 🤝 Contributing
 
-欢迎提交Issue和Pull Request来改进这个项目！
+Welcome to submit Issues and Pull Requests to improve this project!
 
-## 📞 联系方式
+## 📞 Contact
 
-如有问题或建议，请通过以下方式联系：
-- 邮箱：info@goodshop.com
-- 电话：400-123-4567
+For questions or suggestions, please contact us:
+- Email: info@goodshop.com
+- Phone: 400-123-4567
 
 ---
 
-**注意**: 这是一个演示项目，商品数据为示例数据，实际使用时请替换为真实的商品信息。
+**Note**: This is a demo project with sample product data. Please replace with real product information when using in production.

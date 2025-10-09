@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>精品商城 - 优质商品展示</title>
+    <title>Premium Store - Quality Products Showcase</title>
     <link rel="stylesheet" href="styles.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
@@ -12,20 +12,20 @@
     <nav class="navbar">
         <div class="nav-container">
             <div class="nav-logo">
-                <h2><i class="fas fa-shopping-bag"></i> 精品商城</h2>
+                <h2><i class="fas fa-shopping-bag"></i> Premium Store</h2>
             </div>
             <ul class="nav-menu">
                 <li class="nav-item">
-                    <a href="#home" class="nav-link">首页</a>
+                    <a href="#home" class="nav-link">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#products" class="nav-link">商品</a>
+                    <a href="#products" class="nav-link">Products</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#about" class="nav-link">关于我们</a>
+                    <a href="#about" class="nav-link">About Us</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#contact" class="nav-link">联系我们</a>
+                    <a href="#contact" class="nav-link">Contact</a>
                 </li>
             </ul>
             <div class="hamburger">
@@ -36,103 +36,97 @@
         </div>
     </nav>
 
-    <!-- 主页横幅 -->
+    <!-- Hero Section -->
     <section id="home" class="hero">
         <div class="hero-content">
-            <h1>发现优质商品</h1>
-            <p>精选全球好物，为您提供最优质的商品体验</p>
-            <a href="#products" class="cta-button">立即选购</a>
+            <h1>Discover Quality Products</h1>
+            <p>Curated global goods, providing you with the finest shopping experience</p>
+            <a href="#products" class="cta-button">Shop Now</a>
         </div>
     </section>
 
-    <!-- 商品展示区域 -->
+    <!-- Products Section -->
     <section id="products" class="products-section">
         <div class="container">
-            <h2 class="section-title">热门商品</h2>
+            <h2 class="section-title">Featured Products</h2>
             <div class="filter-buttons">
-                <button class="filter-btn active" data-filter="all">全部</button>
-                <button class="filter-btn" data-filter="forklift">forklift</button>
-                <button class="filter-btn" data-filter="excavator">excavator</button>
-                <button class="filter-btn" data-filter="tricycle">tricycle</button>
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="forklift">Forklift</button>
+                <button class="filter-btn" data-filter="excavator">Excavator</button>
+                <button class="filter-btn" data-filter="tricycle">Tricycle</button>
             </div>
             <div class="products-grid" id="productsGrid">
-                <!-- 商品将通过JavaScript动态加载 -->
+                <!-- Products will be loaded dynamically via JavaScript -->
             </div>
         </div>
     </section>
 
-    <!-- 关于我们 -->
+    <!-- About Us -->
     <section id="about" class="about-section">
         <div class="container">
-            <h2 class="section-title">关于我们</h2>
+            <h2 class="section-title">About Us</h2>
             <div class="about-content">
                 <div class="about-text">
-                    <p>我们致力于为您提供最优质的商品和服务。通过严格的品质把控和专业的服务团队，我们确保每一位顾客都能享受到满意的购物体验。</p>
-                    <p>我们的使命是连接优质商品与消费者，让每个人都能找到心仪的好物。</p>
+                    <p>We are committed to providing you with the highest quality products and services. Through strict quality control and a professional service team, we ensure that every customer enjoys a satisfying shopping experience.</p>
+                    <p>Our mission is to connect quality products with consumers, allowing everyone to find their desired goods.</p>
                 </div>
                 <div class="about-stats">
                     <div class="stat-item">
                         <h3>1000+</h3>
-                        <p>商品种类</p>
+                        <p>Product Types</p>
                     </div>
                     <div class="stat-item">
-                        <h3>50万+</h3>
-                        <p>满意客户</p>
+                        <h3>500K+</h3>
+                        <p>Satisfied Customers</p>
                     </div>
                     <div class="stat-item">
                         <h3>99%</h3>
-                        <p>好评率</p>
+                        <p>Positive Rating</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- 联系我们 -->
+    <!-- Contact Us -->
     <section id="contact" class="contact-section">
         <div class="container">
-            <h2 class="section-title">联系我们</h2>
+            <h2 class="section-title">Contact Us</h2>
             <div class="contact-content">
                 <div class="contact-info">
                     <div class="contact-item">
                         <i class="fas fa-phone"></i>
                         <div>
-                            <h3>电话</h3>
+                            <h3>Phone</h3>
                             <p>400-123-4567</p>
                         </div>
                     </div>
                     <div class="contact-item">
                         <i class="fas fa-envelope"></i>
                         <div>
-                            <h3>邮箱</h3>
-                            <p>info@goodshop.com</p>
+                            <h3>Email</h3>
+                            <p>zhangxw66666@gmail.com</p>
                         </div>
                     </div>
                     <div class="contact-item">
                         <i class="fas fa-map-marker-alt"></i>
                         <div>
-                            <h3>地址</h3>
-                            <p>北京市朝阳区某某大厦</p>
+                            <h3>Address</h3>
+                            <p>Chaoyang District, Beijing</p>
                         </div>
                     </div>
                 </div>
-                <form class="contact-form">
-                    <input type="text" placeholder="您的姓名" required>
-                    <input type="email" placeholder="您的邮箱" required>
-                    <textarea placeholder="您的留言" rows="5" required></textarea>
-                    <button type="submit" class="submit-btn">发送消息</button>
-                </form>
             </div>
         </div>
     </section>
 
-    <!-- 页脚 -->
+    <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
-                    <h3>精品商城</h3>
-                    <p>为您提供最优质的商品和服务</p>
+                    <h3>Premium Store</h3>
+                    <p>Providing you with the highest quality products and services</p>
                     <div class="social-links">
                         <a href="#"><i class="fab fa-weixin"></i></a>
                         <a href="#"><i class="fab fa-weibo"></i></a>
@@ -140,28 +134,28 @@
                     </div>
                 </div>
                 <div class="footer-section">
-                    <h3>快速链接</h3>
+                    <h3>Quick Links</h3>
                     <ul>
-                        <li><a href="#home">首页</a></li>
-                        <li><a href="#products">商品</a></li>
-                        <li><a href="#about">关于我们</a></li>
-                        <li><a href="#contact">联系我们</a></li>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#products">Products</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#contact">Contact</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
-                    <h3>客户服务</h3>
+                    <h3>Customer Service</h3>
                     <ul>
-                        <li><a href="customer-service.html#shopping-guide">购物指南</a></li>
-                        <li><a href="customer-service.html#return-policy">退换货政策</a></li>
-                        <li><a href="customer-service.html#delivery-info">配送说明</a></li>
-                        <li><a href="customer-service.html#faq">常见问题</a></li>
-                        <li><a href="customer-service.html#warranty">保修服务</a></li>
-                        <li><a href="customer-service.html#customer-support">在线客服</a></li>
+                        <li><a href="customer-service.html#shopping-guide">Shopping Guide</a></li>
+                        <li><a href="customer-service.html#return-policy">Return Policy</a></li>
+                        <li><a href="customer-service.html#delivery-info">Delivery Info</a></li>
+                        <li><a href="customer-service.html#faq">FAQ</a></li>
+                        <li><a href="customer-service.html#warranty">Warranty</a></li>
+                        <li><a href="customer-service.html#customer-support">Online Support</a></li>
                     </ul>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2024 精品商城. 保留所有权利.</p>
+                <p>&copy; 2024 Premium Store. All rights reserved.</p>
             </div>
         </div>
     </footer>
