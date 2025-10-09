@@ -3,7 +3,7 @@ const products = [
     {
         id: 1,
         name: "3 ton forklift",
-        description: "3 ton forklift, commission 5000 ghc, second hand",
+        description: "3 ton forklift, commission 5000 ghc, second hand forklift ",
         price: "$11000",
         category: "forklift",
         images: ["forklift30-1.jpg"]
@@ -11,7 +11,7 @@ const products = [
     {
         id: 2,
         name: "3.5 ton forklift",
-        description: "3.5 ton forklift, commission 5000 ghc, second hand",
+        description: "3.5 ton forklift, commission 5000 ghc, second hand forklift ",
         price: "$15000",
         category: "forklift",
         images: ["forklift35-1.jpg", "forklift35-2.jpg"],
@@ -20,7 +20,7 @@ const products = [
     {
         id: 3,
         name: "5 ton forklift",
-        description: "5 ton forklift, commission 6000 ghc, second hand",
+        description: "5 ton forklift, commission 6000 ghc, second hand forklift ",
         price: "$20000",
         category: "forklift",
         images: ["forklift50-1.jpg", "forklift50-2.jpg", "forklift50-3.jpg"]
