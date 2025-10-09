@@ -6,7 +6,8 @@ const products = [
         description: "3 ton forklift, commission 5000 ghc, second hand",
         price: "$11000",
         category: "forklift",
-        icon: "📱"
+        image: "forklift1.jpg",
+        video: "forklift1.mp4"
     },
     {
         id: 2,
@@ -14,7 +15,7 @@ const products = [
         description: "3.5 ton forklift, commission 5000 ghc, second hand",
         price: "$15000",
         category: "forklift",
-        icon: "🎧"
+        image: "forklift2.jpg"
     },
     {
         id: 3,
@@ -22,7 +23,7 @@ const products = [
         description: "5 ton forklift, commission 6000 ghc, second hand",
         price: "$20000",
         category: "forklift",
-        icon: "💻"
+        image: "forklift3.jpg"
     },
     {
         id: 4,
@@ -30,7 +31,7 @@ const products = [
         description: "excavator 21.5ton, commission 5000us$, new brand Liugong",
         price: "$139000",
         category: "excavator",
-        icon: "👕"
+        image: "forklift4.jpg"
     },
     {
         id: 5,
@@ -38,7 +39,7 @@ const products = [
         description: "excavator 25ton, commission 10000 ghc, second hand in Ghana",
         price: "$40000",
         category: "excavator",
-        icon: "👖"
+        image: "forklift5.jpg"
     },
     {
         id: 6,
@@ -46,7 +47,7 @@ const products = [
         description: "excavator 35ton, commission 10000 ghc, second hand in Ghana",
         price: "$44000",
         category: "excavator",
-        icon: "👟"
+        image: "forklift1.jpg"
     },
     {
         id: 7,
@@ -54,7 +55,7 @@ const products = [
         description: "tricycle, commission 1200 ghc, for transportation ",
         price: "$2380",
         category: "tricycle",
-        icon: "💡"
+        image: "forklift2.jpg"
     },
     {
         id: 8,
@@ -62,7 +63,7 @@ const products = [
         description: "tricycle, commission 1200 ghc, for passengers ",
         price: "$2380",
         category: "tricycle",
-        icon: "☕"
+        image: "forklift3.jpg"
     }
 ];
 
@@ -142,9 +143,23 @@ function displayProducts(filter) {
 function createProductCard(product) {
     const card = document.createElement('div');
     card.className = 'product-card';
+    
+    // 构建媒体内容
+    let mediaContent = '';
+    if (product.video) {
+        mediaContent = `
+            <video class="product-media" controls poster="${product.image}" preload="metadata">
+                <source src="${product.video}" type="video/mp4">
+                <img src="${product.image}" alt="${product.name}" class="product-fallback">
+            </video>
+        `;
+    } else {
+        mediaContent = `<img src="${product.image}" alt="${product.name}" class="product-media" loading="lazy">`;
+    }
+    
     card.innerHTML = `
         <div class="product-image">
-            <span style="font-size: 4rem;">${product.icon}</span>
+            ${mediaContent}
         </div>
         <div class="product-info">
             <h3 class="product-title">${product.name}</h3>
@@ -152,6 +167,27 @@ function createProductCard(product) {
             <div class="product-price">${product.price}</div>
         </div>
     `;
+    
+    // 添加媒体加载处理
+    const productImage = card.querySelector('.product-image');
+    const media = card.querySelector('.product-media');
+    
+    if (media) {
+        // 显示加载状态
+        productImage.classList.add('loading');
+        
+        // 媒体加载完成
+        media.addEventListener('load', () => {
+            productImage.classList.remove('loading');
+        });
+        
+        // 媒体加载错误处理
+        media.addEventListener('error', () => {
+            productImage.classList.remove('loading');
+            console.warn(`Failed to load media for product: ${product.name}`);
+        });
+    }
+    
     return card;
 }
 
