@@ -129,7 +129,7 @@ const productsGrid = document.getElementById('productsGrid');
 const filterButtons = document.querySelectorAll('.filter-btn');
 const hamburger = document.querySelector('.hamburger');
 const navMenu = document.querySelector('.nav-menu');
-const contactForm = document.querySelector('.contact-form');
+// const contactForm = document.querySelector('.contact-form');
 
 // 初始化
 document.addEventListener('DOMContentLoaded', function() {
@@ -169,7 +169,7 @@ function setupEventListeners() {
     });
 
     // 联系表单提交
-    contactForm.addEventListener('submit', handleFormSubmit);
+    // contactForm.addEventListener('submit', handleFormSubmit);
 
     // 滚动时导航栏效果
     window.addEventListener('scroll', handleScroll);
