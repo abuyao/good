@@ -2,75 +2,67 @@
 const products = [
     {
         id: 1,
-        name: "智能手机",
-        description: "最新款智能手机，性能强劲，拍照出色",
-        price: "¥2999",
-        category: "electronics",
+        name: "3 ton forklift",
+        description: "3 ton forklift, commission 5000 ghc, second hand",
+        price: "$11000",
+        category: "forklift",
         icon: "📱"
     },
     {
         id: 2,
-        name: "无线耳机",
-        description: "高品质无线蓝牙耳机，音质清晰",
-        price: "¥599",
-        category: "electronics",
+        name: "3.5 ton forklift",
+        description: "3.5 ton forklift, commission 5000 ghc, second hand",
+        price: "$15000",
+        category: "forklift",
         icon: "🎧"
     },
     {
         id: 3,
-        name: "笔记本电脑",
-        description: "轻薄便携的商务笔记本电脑",
-        price: "¥5999",
-        category: "electronics",
+        name: "5 ton forklift",
+        description: "5 ton forklift, commission 6000 ghc, second hand",
+        price: "$20000",
+        category: "forklift",
         icon: "💻"
     },
     {
         id: 4,
-        name: "时尚T恤",
-        description: "舒适透气的纯棉T恤，多种颜色可选",
-        price: "¥129",
-        category: "clothing",
+        name: "excavator 21.5ton",
+        description: "excavator 21.5ton, commission 5000us$, new brand Liugong",
+        price: "$139000",
+        category: "excavator",
         icon: "👕"
     },
     {
         id: 5,
-        name: "牛仔裤",
-        description: "经典款牛仔裤，修身显瘦",
-        price: "¥299",
-        category: "clothing",
+        name: "excavator 25ton",
+        description: "excavator 25ton, commission 10000 ghc, second hand in Ghana",
+        price: "$40000",
+        category: "excavator",
         icon: "👖"
     },
     {
         id: 6,
-        name: "运动鞋",
-        description: "轻便舒适的运动鞋，适合日常穿着",
-        price: "¥399",
-        category: "clothing",
+        name: "excavator 35ton",
+        description: "excavator 35ton, commission 10000 ghc, second hand in Ghana",
+        price: "$44000",
+        category: "excavator",
         icon: "👟"
     },
     {
         id: 7,
-        name: "台灯",
-        description: "护眼LED台灯，可调节亮度",
-        price: "¥199",
-        category: "home",
+        name: "tricycle",
+        description: "tricycle, commission 1200 ghc, for transportation ",
+        price: "$2380",
+        category: "tricycle",
         icon: "💡"
     },
     {
         id: 8,
-        name: "咖啡杯",
-        description: "精美陶瓷咖啡杯，保温效果好",
-        price: "¥89",
-        category: "home",
+        name: "tricycle",
+        description: "tricycle, commission 1200 ghc, for passengers ",
+        price: "$2380",
+        category: "tricycle",
         icon: "☕"
-    },
-    {
-        id: 9,
-        name: "抱枕",
-        description: "柔软舒适的抱枕，多种图案可选",
-        price: "¥69",
-        category: "home",
-        icon: "🛋️"
     }
 ];
 
