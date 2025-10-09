@@ -64,6 +64,63 @@ const products = [
         price: "$2380",
         category: "tricycle",
         images: ["tricycle2-1.jpg", "tricycle2-2.jpg", "tricycle2-3.jpg"]
+    },
+    {
+        id: 9,
+        name: "resin sheet",
+        description: "resin sheet, commission 0.45 us$/m, produced in Ghana ",
+        price: "9usd/m",
+        category: "resin",
+        images: ["resin-1.jpg", "resin-2.jpg", "resin-3.jpg", "resin2-1.jpg", "resin2-2.jpg"],
+        videos: ["resin-1.mp4","resin-2.mp4"]
+    },
+    {
+        id: 10,
+        name: "new Toyota car",
+        description: "new Toyota car, commission 1000 us$, in Osu already ",
+        price: "$45000",
+        category: "car",
+        images: ["toyota-1.jpg", "toyota-2.jpg"]
+    },
+    {
+        id: 11,
+        name: "marble",
+        description: "marble, commission 3%, different price by colors and process ",
+        price: "we can send you individually",
+        category: "marble",
+        images: ["marble-1.jpg", "marble-2.jpg", "marble-3.jpg", "marble-4.jpg", "marble-5.jpg", "marble-6.jpg", "marble-7.jpg", "marble-8.jpg"]
+    },
+    {
+        id: 12,
+        name: "steel and zinc coating coils",
+        description: "steel and zinc coating coils, commission 1%, materials for roof sheet,  in China ",
+        price: "we can send you individually",
+        category: "coils",
+        images: ["coils-1.jpg", "coils-2.jpg", "coils-3.jpg"]
+    },
+    {
+        id: 13,
+        name: "gari machine ",
+        description: "gari machine , commission 500ghc, new brand from China",
+        price: "8000 ghc",
+        category: "machine",
+        videos: ["machine.mp4"]
+    },
+    {
+        id: 14,
+        name: "build house and roads ",
+        description: "build house and roads , commission 1%,  we have so many teams for building",
+        price: "negotiatable",
+        category: "build",
+        images: ["build-1.jpg", "build-2.jpg", "build-3.jpg", "build-4.jpg", "build-5.jpg"]
+    },
+    {
+        id: 15,
+        name: "paints",
+        description: "paints, commission 5%,  different price ",
+        price: "we can send you individually",
+        category: "paints",
+        images: ["paints-1.jpeg", "paints-2.jpeg", "paints-3.jpeg", "paints-4.jpeg"]
     }
 ];
 
