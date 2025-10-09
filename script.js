@@ -88,7 +88,7 @@ const products = [
         description: "marble, commission 3%, different price by colors and process ",
         price: "we can send you individually",
         category: "marble",
-        images: ["marble-1.jpg", "marble-2.jpg", "marble-3.jpg", "marble-4.jpg", "marble-5.jpg", "marble-6.jpg", "marble-7.jpg", "marble-8.jpg"]
+        images: ["marble1.jpg", "marble2.jpg", "marble3.jpg", "marble4.jpg", "marble5.jpg", "marble6.jpg", "marble7.jpg", "marble8.jpg"]
     },
     {
         id: 12,
@@ -112,7 +112,7 @@ const products = [
         description: "build house and roads , commission 1%,  we have so many teams for building",
         price: "negotiatable",
         category: "build",
-        images: ["build-1.jpg", "build-2.jpg", "build-3.jpg", "build-4.jpg", "build-5.jpg"]
+        images: ["build1.jpg", "build2.jpg", "build3.jpg", "build4.jpg", "build5.jpg"]
     },
     {
         id: 15,
@@ -120,7 +120,7 @@ const products = [
         description: "paints, commission 5%,  different price ",
         price: "we can send you individually",
         category: "paints",
-        images: ["paints-1.jpeg", "paints-2.jpeg", "paints-3.jpeg", "paints-4.jpeg"]
+        images: ["paints1.jpeg", "paints2.jpeg", "paints3.jpeg", "paints4.jpeg"]
     }
 ];
 
