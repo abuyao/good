@@ -71,8 +71,7 @@ const products = [
         description: "resin sheet, commission 0.45 us$/m, produced in Ghana ",
         price: "9usd/m",
         category: "resin",
-        images: ["resin-1.jpg", "resin-2.jpg", "resin-3.jpg", "resin2-1.jpg", "resin2-2.jpg"],
-        videos: ["resin-1.mp4","resin-2.mp4"]
+        images: ["resin2-1.jpg", "resin2-2.jpg"]
     },
     {
         id: 10,
@@ -121,7 +120,16 @@ const products = [
         price: "we can send you individually",
         category: "paints",
         images: ["paints1.jpeg", "paints2.jpeg", "paints3.jpeg", "paints4.jpeg"]
-    }
+    },
+    {
+        id: 16,
+        name: "mattresses",
+        description: "mattresses, commission 200ghc,  different price ",
+        price: "we can send you individually",
+        category: "mattresses",
+        images: ["mattresses-price.jpg", "resin-1.jpg", "resin-2.jpg", "resin-3.jpg"],
+        videos: ["resin-1.mp4","resin-2.mp4"]
+    },
 ];
 
 // DOM元素
