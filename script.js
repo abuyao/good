@@ -31,7 +31,7 @@ const products = [
         description: "excavator 21.5ton, commission 5000us$, new brand Liugong",
         price: "$139000",
         category: "excavator",
-        images: ["excavator215-1.jpg", "excavator215-2.jpg", "excavator215-3.jpg", "excavator215-4.jpg"]
+        images: ["excavator250-1.jpg"]
     },
     {
         id: 5,
@@ -39,7 +39,7 @@ const products = [
         description: "excavator 25ton, commission 10000 ghc, second hand in Ghana",
         price: "$40000",
         category: "excavator",
-        images: ["excavator250-1.jpg"]
+        images: ["excavator215-1.jpg", "excavator215-2.jpg", "excavator215-3.jpg", "excavator215-4.jpg"]
     },
     {
         id: 6,
@@ -151,6 +151,9 @@ function setupEventListeners() {
             
             // 显示对应商品
             displayProducts(filter);
+            
+            // 平滑滚动到产品列表区域
+            scrollToProductsGrid();
         });
     });
 
@@ -401,6 +404,97 @@ function setupSmoothScrolling() {
     });
 }
 
+// 滚动到产品网格区域
+function scrollToProductsGrid() {
+    const productsGrid = document.getElementById('productsGrid');
+    if (productsGrid) {
+        // 计算产品网格的位置，稍微向上偏移以显示标题
+        const productsSection = document.getElementById('products');
+        const sectionTitle = productsSection.querySelector('.section-title');
+        const filterButtons = productsSection.querySelector('.filter-buttons');
+        
+        // 计算目标位置：产品区域顶部 + 标题高度 + 筛选按钮高度 + 一些间距
+        const targetPosition = productsSection.offsetTop + 
+                              (sectionTitle ? sectionTitle.offsetHeight : 0) + 
+                              (filterButtons ? filterButtons.offsetHeight : 0) + 20;
+        
+        // 添加产品网格滚动动画
+        productsGrid.classList.add('scrolling');
+        
+        // 平滑滚动到目标位置
+        window.scrollTo({
+            top: targetPosition,
+            behavior: 'smooth'
+        });
+        
+        // 添加视觉反馈
+        addScrollFeedback();
+        
+        // 滚动完成后移除动画类
+        setTimeout(() => {
+            productsGrid.classList.remove('scrolling');
+        }, 1000);
+    }
+}
+
+// 添加滚动反馈效果
+function addScrollFeedback() {
+    // 创建滚动指示器
+    const indicator = document.createElement('div');
+    indicator.className = 'scroll-indicator';
+    indicator.innerHTML = '<i class="fas fa-arrow-down"></i>';
+    
+    // 添加样式
+    indicator.style.cssText = `
+        position: fixed;
+        top: 50%;
+        right: 30px;
+        transform: translateY(-50%);
+        background: rgba(52, 152, 219, 0.9);
+        color: white;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        z-index: 1000;
+        animation: bounce 1s ease-in-out;
+        box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+    `;
+    
+    document.body.appendChild(indicator);
+    
+    // 添加弹跳动画
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(-50%) translateY(0);
+            }
+            40% {
+                transform: translateY(-50%) translateY(-10px);
+            }
+            60% {
+                transform: translateY(-50%) translateY(-5px);
+            }
+        }
+    `;
+    document.head.appendChild(style);
+    
+    // 3秒后移除指示器
+    setTimeout(() => {
+        indicator.style.opacity = '0';
+        indicator.style.transition = 'opacity 0.5s ease';
+        setTimeout(() => {
+            if (document.body.contains(indicator)) {
+                document.body.removeChild(indicator);
+            }
+        }, 500);
+    }, 3000);
+}
+
 // 添加CSS动画
 const style = document.createElement('style');
 style.textContent = `
@@ -413,6 +507,51 @@ style.textContent = `
         background: #e74c3c !important;
     }
     
+    /* 分类按钮点击动画 */
+    .filter-btn {
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .filter-btn::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 0;
+        height: 0;
+        background: rgba(255, 255, 255, 0.3);
+        border-radius: 50%;
+        transform: translate(-50%, -50%);
+        transition: width 0.6s, height 0.6s;
+    }
+    
+    .filter-btn:active::before {
+        width: 300px;
+        height: 300px;
+    }
+    
+    .filter-btn.active {
+        transform: scale(1.05);
+        box-shadow: 0 8px 25px rgba(52, 152, 219, 0.3);
+    }
+    
+    .filter-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+    
+    /* 产品网格滚动动画 */
+    .products-grid {
+        transition: all 0.5s ease;
+    }
+    
+    .products-grid.scrolling {
+        transform: scale(1.02);
+        filter: brightness(1.1);
+    }
+    
     @keyframes fadeInUp {
         from {
             opacity: 0;
@@ -421,6 +560,34 @@ style.textContent = `
         to {
             opacity: 1;
             transform: translateY(0);
+        }
+    }
+    
+    @keyframes slideInFromTop {
+        from {
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    /* 滚动指示器动画 */
+    .scroll-indicator {
+        animation: pulse 2s infinite;
+    }
+    
+    @keyframes pulse {
+        0% {
+            transform: translateY(-50%) scale(1);
+        }
+        50% {
+            transform: translateY(-50%) scale(1.1);
+        }
+        100% {
+            transform: translateY(-50%) scale(1);
         }
     }
 `;
