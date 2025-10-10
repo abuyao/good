@@ -246,9 +246,9 @@ function createProductCard(product) {
                 <div class="media-container">
                     ${mediaItems.map((item, index) => {
                         if (item.type === 'image') {
-                            return `<img src="${item.src}" alt="${item.alt}" class="media-item ${index === 0 ? 'active' : ''}" loading="lazy">`;
+                            return `<img src="${item.src}" alt="${item.alt}" class="media-item ${index === 0 ? 'active' : ''}" loading="lazy" style="cursor: pointer;">`;
                         } else {
-                            return `<video class="media-item ${index === 0 ? 'active' : ''}" controls poster="${item.poster}" preload="metadata">
+                            return `<video class="media-item ${index === 0 ? 'active' : ''}" controls autoplay loop muted poster="${item.poster}" preload="metadata">
                                 <source src="${item.src}" type="video/mp4">
                             </video>`;
                         }
@@ -273,9 +273,9 @@ function createProductCard(product) {
         // 单个媒体文件
         const item = mediaItems[0];
         if (item.type === 'image') {
-            mediaContent = `<img src="${item.src}" alt="${item.alt}" class="product-media" loading="lazy">`;
+            mediaContent = `<img src="${item.src}" alt="${item.alt}" class="product-media" loading="lazy" onclick="openFullscreen('${item.src}', '${item.alt}')" style="cursor: pointer;">`;
         } else {
-            mediaContent = `<video class="product-media" controls poster="${item.poster}" preload="metadata">
+            mediaContent = `<video class="product-media" controls autoplay loop muted poster="${item.poster}" preload="metadata">
                 <source src="${item.src}" type="video/mp4">
             </video>`;
         }
@@ -295,6 +295,36 @@ function createProductCard(product) {
     // 添加媒体加载处理
     const productImage = card.querySelector('.product-image');
     const mediaElements = card.querySelectorAll('.media-item, .product-media');
+    
+    // 为轮播容器添加点击事件
+    const mediaCarousel = card.querySelector('.media-carousel');
+    if (mediaCarousel) {
+        // 为轮播容器添加点击事件，点击任何地方都能打开当前激活的图片
+        mediaCarousel.addEventListener('click', (e) => {
+            // 如果点击的是控制按钮或指示器，不处理
+            if (e.target.closest('.media-controls') || e.target.closest('.media-indicators')) {
+                return;
+            }
+            
+            // 如果点击的是图片本身，直接处理图片点击
+            if (e.target.tagName === 'IMG' && e.target.classList.contains('media-item')) {
+                if (e.target.classList.contains('active')) {
+                    const imageSrc = e.target.src;
+                    const imageAlt = e.target.alt;
+                    openFullscreen(imageSrc, imageAlt);
+                }
+                return;
+            }
+            
+            // 其他情况，打开当前激活的图片
+            const activeImage = mediaCarousel.querySelector('.media-item.active');
+            if (activeImage && activeImage.tagName === 'IMG') {
+                const imageSrc = activeImage.src;
+                const imageAlt = activeImage.alt;
+                openFullscreen(imageSrc, imageAlt);
+            }
+        });
+    }
     
     if (mediaElements.length > 0) {
         // 显示加载状态
@@ -734,5 +764,142 @@ function addTouchSupport() {
                 }
             }
         });
+    });
+}
+
+// 全屏图片展示功能
+function openFullscreen(imageSrc, imageAlt) {
+    // 创建全屏遮罩层
+    const fullscreenOverlay = document.createElement('div');
+    fullscreenOverlay.className = 'fullscreen-overlay';
+    fullscreenOverlay.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.9);
+        z-index: 10000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    `;
+    
+    // 创建全屏图片
+    const fullscreenImage = document.createElement('img');
+    fullscreenImage.src = imageSrc;
+    fullscreenImage.alt = imageAlt;
+    fullscreenImage.style.cssText = `
+        max-width: 90%;
+        max-height: 90%;
+        object-fit: contain;
+        border-radius: 8px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        transform: scale(0.8);
+        transition: transform 0.3s ease;
+    `;
+    
+    // 创建关闭按钮
+    const closeButton = document.createElement('button');
+    closeButton.innerHTML = '<i class="fas fa-times"></i>';
+    closeButton.style.cssText = `
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        background: rgba(255, 255, 255, 0.2);
+        border: none;
+        color: white;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        font-size: 20px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background 0.3s ease;
+    `;
+    
+    // 创建图片信息
+    const imageInfo = document.createElement('div');
+    imageInfo.textContent = imageAlt;
+    imageInfo.style.cssText = `
+        position: absolute;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        color: white;
+        background: rgba(0, 0, 0, 0.7);
+        padding: 10px 20px;
+        border-radius: 20px;
+        font-size: 14px;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    `;
+    
+    // 组装全屏元素
+    fullscreenOverlay.appendChild(fullscreenImage);
+    fullscreenOverlay.appendChild(closeButton);
+    fullscreenOverlay.appendChild(imageInfo);
+    document.body.appendChild(fullscreenOverlay);
+    
+    // 添加键盘和点击事件
+    const closeFullscreen = () => {
+        fullscreenOverlay.style.opacity = '0';
+        fullscreenImage.style.transform = 'scale(0.8)';
+        imageInfo.style.opacity = '0';
+        
+        setTimeout(() => {
+            if (document.body.contains(fullscreenOverlay)) {
+                document.body.removeChild(fullscreenOverlay);
+            }
+        }, 300);
+    };
+    
+    // 事件监听
+    fullscreenOverlay.addEventListener('click', (e) => {
+        if (e.target === fullscreenOverlay || e.target === fullscreenImage) {
+            closeFullscreen();
+        }
+    });
+    
+    closeButton.addEventListener('click', closeFullscreen);
+    
+    // 键盘事件
+    const handleKeyPress = (e) => {
+        if (e.key === 'Escape') {
+            closeFullscreen();
+            document.removeEventListener('keydown', handleKeyPress);
+        }
+    };
+    document.addEventListener('keydown', handleKeyPress);
+    
+    // 关闭按钮悬停效果
+    closeButton.addEventListener('mouseenter', () => {
+        closeButton.style.background = 'rgba(255, 255, 255, 0.3)';
+    });
+    
+    closeButton.addEventListener('mouseleave', () => {
+        closeButton.style.background = 'rgba(255, 255, 255, 0.2)';
+    });
+    
+    // 显示动画
+    setTimeout(() => {
+        fullscreenOverlay.style.opacity = '1';
+        fullscreenImage.style.transform = 'scale(1)';
+        imageInfo.style.opacity = '1';
+    }, 50);
+    
+    // 图片加载完成后的处理
+    fullscreenImage.addEventListener('load', () => {
+        // 确保图片完全加载后再显示
+        setTimeout(() => {
+            fullscreenOverlay.style.opacity = '1';
+            fullscreenImage.style.transform = 'scale(1)';
+            imageInfo.style.opacity = '1';
+        }, 100);
     });
 } 
