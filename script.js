@@ -31,7 +31,7 @@ const products = [
         description: "excavator 21.5ton, commission 5000us$, new brand Liugong",
         price: "$139000",
         category: "excavator",
-        images: ["excavator250-1.jpg"]
+        images: ["excavator250-1.jpg", "excavator350-1.jpg"]
     },
     {
         id: 5,
@@ -47,7 +47,7 @@ const products = [
         description: "excavator 35ton, commission 10000 ghc, second hand in Ghana",
         price: "$44000",
         category: "excavator",
-        images: ["excavator350-1.jpg"]
+        images: ["excavator215-2.jpg", "excavator215-3.jpg", "excavator215-1.jpg", "excavator215-4.jpg"]
     },
     {
         id: 7,
@@ -71,7 +71,7 @@ const products = [
         description: "resin sheet, commission 0.45 us$/m, produced in Ghana ",
         price: "9usd/m",
         category: "resin",
-        images: ["resin2-1.jpg", "resin2-2.jpg"]
+        images: ["resin3-1.jpg", "resin3-2.jpg", "resin3-3.jpg", "resin3-4.jpg", "resin3-5.jpg", "resin3-6.jpg", "resin3-7.jpg"]
     },
     {
         id: 10,
@@ -127,7 +127,7 @@ const products = [
         description: "mattresses, commission 200ghc,  different price ",
         price: "we can send you individually",
         category: "mattresses",
-        images: ["mattresses-price.jpg", "resin-1.jpg", "resin-2.jpg", "resin-3.jpg"],
+        images: ["mattresses-price.jpg", "resin-1.jpg", "resin-2.jpg", "resin-3.jpg", "resin2-1.jpg", "resin2-2.jpg"],
         videos: ["resin-1.mp4","resin-2.mp4"]
     },
 ];
