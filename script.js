@@ -87,7 +87,7 @@ const products = [
         description: "marble, commission 3%, different price by colors and process ",
         price: "we can send you individually",
         category: "marble",
-        images: ["marble1.jpg", "marble2.jpg", "marble3.jpg", "marble4.jpg", "marble5.jpg", "marble6.jpg", "marble7.jpg", "marble8.jpg"]
+        images: ["marble1.jpg", "marble2.jpg", "marble3.jpg", "marble4.jpg", "marble5.jpg", "marble6.jpg", "marble7.jpg", "marble8.jpg", "marble10.jpg", "marble11.jpg", "marble12.jpg", "marble13.jpg", "marble14.jpg", "marble15.jpg", "marble16.jpg", "marble17.jpg", "marble18.jpg", "marble19.jpg"]
     },
     {
         id: 12,
@@ -127,7 +127,7 @@ const products = [
         description: "mattresses, commission 200ghc,  different price ",
         price: "we can send you individually",
         category: "mattresses",
-        images: ["mattresses-price.jpg", "resin-1.jpg", "resin-2.jpg", "resin-3.jpg", "resin2-1.jpg", "resin2-2.jpg"],
+        images: ["mattresses-price.png", "resin-1.jpg", "resin-2.jpg", "resin-3.jpg", "resin2-1.jpg", "resin2-2.jpg"],
         videos: ["resin-1.mp4","resin-2.mp4"]
     },
 ];
