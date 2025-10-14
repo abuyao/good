@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - Message Management</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        /* 后台页面专用样式 */
+        .admin-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .admin-header {
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+            color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .admin-header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .message-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .stat-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        
+        .stat-card h3 {
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-card .number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #3498db;
+        }
+        
+        .messages-table {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        
+        .table-header {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-bottom: 2px solid #e9ecef;
+        }
+        
+        .table-header h2 {
+            margin: 0;
+            color: #2c3e50;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+        }
+        
+        .messages-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .messages-table th,
+        .messages-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        .messages-table th {
+            background: #f8f9fa;
+            font-weight: 600;
+            color: #2c3e50;
+            position: sticky;
+            top: 0;
+        }
+        
+        .messages-table tr:hover {
+            background: #f8f9fa;
+        }
+        
+        .message-details {
+            max-width: 200px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        
+        .message-details:hover {
+            white-space: normal;
+            overflow: visible;
+            position: relative;
+            z-index: 10;
+            background: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            padding: 0.5rem;
+        }
+        
+        .status-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .status-new {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .status-read {
+            background: #cce5ff;
+            color: #004085;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 3rem;
+            color: #6c757d;
+        }
+        
+        .error {
+            text-align: center;
+            padding: 3rem;
+            color: #dc3545;
+            background: #f8d7da;
+            border-radius: 10px;
+            margin: 1rem 0;
+        }
+        
+        .refresh-btn {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .refresh-btn:hover {
+            background: linear-gradient(135deg, #2980b9, #1f5f8b);
+            transform: translateY(-2px);
+        }
+        
+        .no-messages {
+            text-align: center;
+            padding: 3rem;
+            color: #6c757d;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+        
+        .delete-btn {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+        
+        .delete-btn:hover {
+            background: linear-gradient(135deg, #c0392b, #a93226);
+            transform: translateY(-1px);
+            box-shadow: 0 3px 10px rgba(231, 76, 60, 0.3);
+        }
+        
+        .delete-btn:disabled {
+            background: #bdc3c7;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 0.5rem;
+            justify-content: center;
+        }
+        
+        @media (max-width: 768px) {
+            .admin-container {
+                padding: 1rem;
+            }
+            
+            .admin-header h1 {
+                font-size: 2rem;
+            }
+            
+            .message-stats {
+                grid-template-columns: 1fr;
+            }
+            
+            .messages-table th,
+            .messages-table td {
+                padding: 0.5rem;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-container">
+        <!-- 页面头部 -->
+        <div class="admin-header">
+            <h1>
+                <i class="fas fa-tachometer-alt"></i>
+                Admin Panel - Message Management
+            </h1>
+        </div>
+        
+        <!-- 统计信息 -->
+        <!-- <div class="message-stats" id="messageStats">
+            <div class="stat-card">
+                <h3>Total Messages</h3>
+                <div class="number" id="totalMessages">-</div>
+            </div>
+            <div class="stat-card">
+                <h3>New Messages</h3>
+                <div class="number" id="newMessages">-</div>
+            </div>
+            <div class="stat-card">
+                <h3>Today's Messages</h3>
+                <div class="number" id="todayMessages">-</div>
+            </div>
+        </div> -->
+        
+        <!-- 留言列表 -->
+        <div class="messages-table">
+            <div class="table-header">
+                <h2>
+                    <i class="fas fa-comments"></i>
+                    Message List
+                </h2>
+                <button class="refresh-btn" onclick="loadMessages()">
+                    <i class="fas fa-sync-alt"></i>
+                    Refresh
+                </button>
+            </div>
+            
+            <div class="table-container">
+                <div id="loadingIndicator" class="loading" style="display: none;">
+                    <i class="fas fa-spinner fa-spin"></i> Loading messages...
+                </div>
+                
+                <div id="errorIndicator" class="error" style="display: none;">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <span id="errorMessage">Failed to load messages</span>
+                </div>
+                
+                <div id="noMessagesIndicator" class="no-messages" style="display: none;">
+                    <i class="fas fa-inbox"></i>
+                    <p>No messages found</p>
+                </div>
+                
+                <table id="messagesTable" style="display: none;">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Customer Name</th>
+                            <th>Product</th>
+                            <th>Specification</th>
+                            <th>Quantity</th>
+                            <th>Delivery Date</th>
+                            <th>Location</th>
+                            <th>Phone</th>
+                            <th>WhatsApp</th>
+                            <th>Message</th>
+                            <th>Status</th>
+                            <th>Date</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="messagesTableBody">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let messages = [];
+        
+        // 页面加载时获取数据
+        document.addEventListener('DOMContentLoaded', function() {
+            loadMessages();
+        });
+        
+        // 加载留言数据
+        async function loadMessages() {
+            const loadingIndicator = document.getElementById('loadingIndicator');
+            const errorIndicator = document.getElementById('errorIndicator');
+            const noMessagesIndicator = document.getElementById('noMessagesIndicator');
+            const messagesTable = document.getElementById('messagesTable');
+            const messagesTableBody = document.getElementById('messagesTableBody');
+            
+            // 显示加载状态
+            loadingIndicator.style.display = 'block';
+            errorIndicator.style.display = 'none';
+            noMessagesIndicator.style.display = 'none';
+            messagesTable.style.display = 'none';
+            
+            try {
+                const response = await fetch('http://8.148.195.38/printer/common/data/list/message');
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const result = await response.json();
+                
+                if (result.code === 200 && result.data && result.data.list) {
+                    messages = result.data.list.map(item => {
+                        try {
+                            // 解析JSON字符串
+                            return {...JSON.parse(item.data), id: item.id};
+                        } catch (e) {
+                            console.error('Error parsing message:', item, e);
+                            return null;
+                        }
+                    }).filter(item => item !== null);
+                    
+                    displayMessages();
+                    // updateStats();
+                } else {
+                    throw new Error('Invalid response format');
+                }
+                
+            } catch (error) {
+                console.error('Error loading messages:', error);
+                loadingIndicator.style.display = 'none';
+                errorIndicator.style.display = 'block';
+                document.getElementById('errorMessage').textContent = error.message;
+            }
+        }
+        
+        // 显示留言列表
+        function displayMessages() {
+            const loadingIndicator = document.getElementById('loadingIndicator');
+            const errorIndicator = document.getElementById('errorIndicator');
+            const noMessagesIndicator = document.getElementById('noMessagesIndicator');
+            const messagesTable = document.getElementById('messagesTable');
+            const messagesTableBody = document.getElementById('messagesTableBody');
+            
+            loadingIndicator.style.display = 'none';
+            errorIndicator.style.display = 'none';
+            
+            if (messages.length === 0) {
+                noMessagesIndicator.style.display = 'block';
+                messagesTable.style.display = 'none';
+                return;
+            }
+            
+            noMessagesIndicator.style.display = 'none';
+            messagesTable.style.display = 'table';
+            
+            // 清空表格内容
+            messagesTableBody.innerHTML = '';
+            
+            // 按日期排序（最新的在前）
+            const sortedMessages = messages.sort((a, b) => {
+                const dateA = new Date(a.deliveryDate || a.date || 0);
+                const dateB = new Date(b.deliveryDate || b.date || 0);
+                return dateB - dateA;
+            });
+            
+            // 填充表格数据
+            sortedMessages.forEach((message) => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${message.id}</td>
+                    <td>${message.customerName || '-'}</td>
+                    <td>${message.product || '-'}</td>
+                    <td class="message-details">${message.specification || '-'}</td>
+                    <td>${message.quantity || '-'}</td>
+                    <td>${message.deliveryDate || '-'}</td>
+                    <td>${message.customerLocation || '-'}</td>
+                    <td>${message.phoneNumber || '-'}</td>
+                    <td>${message.whatsappNumber || '-'}</td>
+                    <td class="message-details">${message.message || '-'}</td>
+                    <td><span class="status-badge status-new">New</span></td>
+                    <td>${new Date().toLocaleDateString()}</td>
+                    <td>
+                        <div class="action-buttons">
+                            <button class="delete-btn" onclick="deleteMessage(${message.id})" title="Delete Message">
+                                <i class="fas fa-trash"></i>
+                                Delete
+                            </button>
+                        </div>
+                    </td>
+                `;
+                messagesTableBody.appendChild(row);
+            });
+        }
+        
+        // 更新统计信息
+        function updateStats() {
+            const totalMessages = messages.length;
+            const today = new Date().toDateString();
+            const todayMessages = messages.filter(msg => {
+                const msgDate = new Date(msg.deliveryDate || msg.date || 0).toDateString();
+                return msgDate === today;
+            }).length;
+            
+            document.getElementById('totalMessages').textContent = totalMessages;
+            document.getElementById('newMessages').textContent = totalMessages; // 假设所有都是新消息
+            document.getElementById('todayMessages').textContent = todayMessages;
+        }
+        
+        // 删除留言
+        async function deleteMessage(id) {
+            if (!confirm('Are you sure you want to delete this message? This action cannot be undone.')) {
+                return;
+            }
+            
+            try {
+                // 获取要删除的消息ID（这里使用索引作为ID，实际项目中应该有真实的ID）
+                const messageId = id; // 简单的ID生成，实际应该使用真实ID
+                
+                const response = await fetch('http://8.148.195.38/printer/common/data/delete', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        ids: [messageId]
+                    })
+                });
+                
+                if (response.ok) {
+                    const result = await response.json();
+                    if (result.code === 200) {
+                        // 删除成功，从本地数组中移除
+                        messages.splice(messages.findIndex(msg => msg.id === id), 1);
+                        displayMessages();
+                        alert('Message deleted successfully!');
+                    } else {
+                        throw new Error(result.msg || 'Delete failed');
+                    }
+                } else {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+            } catch (error) {
+                console.error('Error deleting message:', error);
+                alert('Failed to delete message: ' + error.message);
+            }
+        }
+        
+        // 自动刷新（每30秒）
+        setInterval(loadMessages, 30000);
+    </script>
+</body>
+</html>

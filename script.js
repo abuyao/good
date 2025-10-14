@@ -902,4 +902,84 @@ function openFullscreen(imageSrc, imageAlt) {
             imageInfo.style.opacity = '1';
         }, 100);
     });
-} 
+}
+
+// 留言表单处理
+document.addEventListener('DOMContentLoaded', function() {
+    const messageForm = document.getElementById('messageForm');
+    const messageStatus = document.getElementById('messageStatus');
+    
+    if (messageForm) {
+        messageForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            // 显示加载状态
+            showMessageStatus('loading', 'Submitting message, please wait...');
+            
+            // 获取表单数据
+            const formData = new FormData(messageForm);
+            const messageData = {
+                product: formData.get('product'),
+                specification: formData.get('specification'),
+                quantity: formData.get('quantity'),
+                deliveryDate: formData.get('deliveryDate'),
+                customerLocation: formData.get('customerLocation'),
+                customerName: formData.get('customerName'),
+                phoneNumber: formData.get('phoneNumber'),
+                whatsappNumber: formData.get('whatsappNumber'),
+                message: formData.get('message') || ''
+            };
+            
+            // 验证必填字段
+            const requiredFields = ['product', 'specification', 'quantity', 'deliveryDate', 'customerLocation', 'customerName', 'phoneNumber', 'whatsappNumber'];
+            const missingFields = requiredFields.filter(field => !messageData[field]);
+            
+            if (missingFields.length > 0) {
+                showMessageStatus('error', 'Please fill in all required fields');
+                return;
+            }
+            
+            // 准备发送的数据
+            const requestData = {
+                type: "message",
+                data: JSON.stringify(messageData)
+            };
+            
+            try {
+                const response = await fetch('http://8.148.195.38/printer/common/data/save', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(requestData)
+                });
+                
+                if (response.ok) {
+                    const result = await response.json();
+                    showMessageStatus('success', 'Message submitted successfully! We will contact you soon.');
+                    messageForm.reset(); // 清空表单
+                } else {
+                    throw new Error('Server response error');
+                }
+            } catch (error) {
+                console.error('Error submitting message:', error);
+                showMessageStatus('error', 'Submission failed, please check your network connection or try again later.');
+            }
+        });
+    }
+    
+    function showMessageStatus(type, message) {
+        if (messageStatus) {
+            messageStatus.className = `message-status ${type}`;
+            messageStatus.textContent = message;
+            messageStatus.style.display = 'block';
+            
+            // 如果是成功或错误消息，3秒后自动隐藏
+            if (type === 'success' || type === 'error') {
+                setTimeout(() => {
+                    messageStatus.style.display = 'none';
+                }, 3000);
+            }
+        }
+    }
+}); 
