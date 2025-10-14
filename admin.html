@@ -340,7 +340,7 @@
             messagesTable.style.display = 'none';
             
             try {
-                const response = await fetch('http://8.148.195.38/printer/common/data/list/message');
+                const response = await fetch('//8.148.195.38/printer/common/data/list/message');
                 
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
@@ -456,7 +456,7 @@
                 // 获取要删除的消息ID（这里使用索引作为ID，实际项目中应该有真实的ID）
                 const messageId = id; // 简单的ID生成，实际应该使用真实ID
                 
-                const response = await fetch('http://8.148.195.38/printer/common/data/delete', {
+                const response = await fetch('//8.148.195.38/printer/common/data/delete', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
