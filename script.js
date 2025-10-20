@@ -83,7 +83,7 @@ const products = [
     },
     {
         id: 11,
-        name: "marble",
+        name: "marble & granite",
         description: "marble, commission 3%, different price by colors and process ",
         price: "we can send you individually",
         category: "marble",
