@@ -946,7 +946,7 @@ document.addEventListener('DOMContentLoaded', function() {
             };
             
             try {
-                const response = await fetch('//8.148.195.38/printer/common/data/save', {
+                const response = await fetch('https://mp.shandingyin.top/printer/common/data/save', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
