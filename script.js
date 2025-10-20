@@ -87,7 +87,10 @@ const products = [
         description: "marble, commission 3%, different price by colors and process ",
         price: "we can send you individually",
         category: "marble",
-        images: ["marble1.jpg", "marble2.jpg", "marble3.jpg", "marble4.jpg", "marble5.jpg", "marble6.jpg", "marble7.jpg", "marble8.jpg", "marble10.jpg", "marble11.jpg", "marble12.jpg", "marble13.jpg", "marble14.jpg", "marble15.jpg", "marble16.jpg", "marble17.jpg", "marble18.jpg", "marble19.jpg"]
+        images: [
+            "marble1.jpg", "marble2.jpg", "marble3.jpg", "marble4.jpg", "marble5.jpg", "marble6.jpg", "marble7.jpg", "marble8.jpg", "marble10.jpg", "marble11.jpg", "marble12.jpg", "marble13.jpg", "marble14.jpg", "marble15.jpg", "marble16.jpg", "marble17.jpg", "marble18.jpg", "marble19.jpg", 
+            "granite1.jpg", "granite2.jpg", "granite3.jpg", "granite4.jpg", "granite5.jpg", "granite6.jpg", "granite7.jpg", "granite8.jpg", "granite9.jpg", "granite10.jpg", "granite11.jpg", "granite12.jpg"
+        ]
     },
     {
         id: 12,
