@@ -85,7 +85,7 @@ const products = [
         id: 11,
         name: "marble & granite",
         description: "marble, commission 3%, different price by colors and process ",
-        price: "we can send you individually",
+        price: " I can send you quotation individually if you have interest in.",
         category: "marble",
         images: [
             "marble1.jpg", "marble2.jpg", "marble3.jpg", "marble4.jpg", "marble5.jpg", "marble6.jpg", "marble7.jpg", "marble8.jpg", "marble10.jpg", "marble11.jpg", "marble12.jpg", "marble13.jpg", "marble14.jpg", "marble15.jpg", "marble16.jpg", "marble17.jpg", "marble18.jpg", "marble19.jpg", 
@@ -96,7 +96,7 @@ const products = [
         id: 12,
         name: "steel and zinc coating coils",
         description: "steel and zinc coating coils, commission 1%, materials for roof sheet,  in China ",
-        price: "we can send you individually",
+        price: " I can send you quotation individually if you have interest in.",
         category: "coils",
         images: ["coils-1.jpg", "coils-2.jpg", "coils-3.jpg"]
     },
@@ -120,7 +120,7 @@ const products = [
         id: 15,
         name: "paints",
         description: "paints, commission 5%,  different price ",
-        price: "we can send you individually",
+        price: " I can send you quotation individually if you have interest in.",
         category: "paints",
         images: ["paints1.jpeg", "paints2.jpeg", "paints3.jpeg", "paints4.jpeg"]
     },
@@ -128,7 +128,7 @@ const products = [
         id: 16,
         name: "mattresses",
         description: "mattresses, commission 200ghc,  different price ",
-        price: "we can send you individually",
+        price: " I can send you quotation individually if you have interest in.",
         category: "mattresses",
         images: ["mattresses-price.png", "resin-1.jpg", "resin-2.jpg", "resin-3.jpg", "resin2-1.jpg", "resin2-2.jpg"],
         videos: ["resin-1.mp4","resin-2.mp4"]
