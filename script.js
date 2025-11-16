@@ -133,6 +133,14 @@ const products = [
         images: ["mattresses-price.png", "resin-1.jpg", "resin-2.jpg", "resin-3.jpg", "resin2-1.jpg", "resin2-2.jpg"],
         videos: ["resin-1.mp4","resin-2.mp4"]
     },
+    {
+        id: 17,
+        name: "machines",
+        description: "machines, rice threshing machine",
+        price: "700 USD",
+        category: "machines",
+        videos: ["rice.mp4"]
+    }
 ];
 
 // DOM元素
