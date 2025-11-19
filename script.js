@@ -152,7 +152,7 @@ const navMenu = document.querySelector('.nav-menu');
 
 // 初始化
 document.addEventListener('DOMContentLoaded', function() {
-    displayProducts('all');
+    displayProducts('forklift');
     setupEventListeners();
     setupSmoothScrolling();
 });
