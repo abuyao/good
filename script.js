@@ -63,7 +63,7 @@ const products = [
         description: "tricycle, commission 1200 ghc, for passengers ",
         price: "$2380",
         category: "tricycle",
-        images: ["tricycle2-1.jpg", "tricycle2-2.jpg", "tricycle2-3.jpg"]
+        images: ["tricycle2-1.jpg", "tricycle2-2.jpg", "tricycle2-3.jpg", "tricycle3-1.jpg", "tricycle3-2.jpg"]
     },
     {
         id: 9,
