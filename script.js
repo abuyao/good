@@ -1,6 +1,33 @@
 // 商品数据
 const products = [
     {
+        id: 11,
+        name: "marble & granite",
+        description: "marble, commission 3%, different price by colors and process ",
+        price: " I can send you quotation individually if you have interest in.",
+        category: "marble",
+        images: [
+            "marble1.jpg", "marble2.jpg", "marble3.jpg", "marble4.jpg", "marble5.jpg", "marble6.jpg", "marble7.jpg", "marble8.jpg", "marble10.jpg", "marble11.jpg", "marble12.jpg", "marble13.jpg", "marble14.jpg", "marble15.jpg", "marble16.jpg", "marble17.jpg", "marble18.jpg", "marble19.jpg", 
+            "granite1.jpg", "granite2.jpg", "granite3.jpg", "granite4.jpg", "granite5.jpg", "granite6.jpg", "granite7.jpg", "granite8.jpg", "granite9.jpg", "granite10.jpg", "granite11.jpg", "granite12.jpg"
+        ]
+    },
+    {
+        id: 18,
+        name: "Red blocks",
+        description: "Red blocks",
+        price: " I can send you quotation individually if you have interest in.",
+        category: "red_blocks",
+        images: ["red_blocks1.png"]
+    },
+    {
+        id: 9,
+        name: "resin roof sheet",
+        description: "resin roof sheet, commission 0.45 us$/m, produced in Ghana ",
+        price: "9usd/m",
+        category: "resin",
+        images: ["resin3-1.jpg", "resin3-2.jpg", "resin3-3.jpg", "resin3-4.jpg", "resin3-5.jpg", "resin3-6.jpg", "resin3-7.jpg"]
+    },
+    {
         id: 1,
         name: "3 ton forklift",
         description: "3 ton forklift, commission 5000 ghc, second hand forklift ",
@@ -66,31 +93,12 @@ const products = [
         images: ["tricycle2-1.jpg", "tricycle2-2.jpg", "tricycle2-3.jpg", "tricycle3-1.jpg", "tricycle3-2.jpg"]
     },
     {
-        id: 9,
-        name: "resin sheet",
-        description: "resin sheet, commission 0.45 us$/m, produced in Ghana ",
-        price: "9usd/m",
-        category: "resin",
-        images: ["resin3-1.jpg", "resin3-2.jpg", "resin3-3.jpg", "resin3-4.jpg", "resin3-5.jpg", "resin3-6.jpg", "resin3-7.jpg"]
-    },
-    {
         id: 10,
         name: "new Toyota car",
         description: "new Toyota car, commission 1000 us$, in Osu already ",
         price: "$45000",
         category: "car",
         images: ["toyota-1.jpg", "toyota-2.jpg"]
-    },
-    {
-        id: 11,
-        name: "marble & granite",
-        description: "marble, commission 3%, different price by colors and process ",
-        price: " I can send you quotation individually if you have interest in.",
-        category: "marble",
-        images: [
-            "marble1.jpg", "marble2.jpg", "marble3.jpg", "marble4.jpg", "marble5.jpg", "marble6.jpg", "marble7.jpg", "marble8.jpg", "marble10.jpg", "marble11.jpg", "marble12.jpg", "marble13.jpg", "marble14.jpg", "marble15.jpg", "marble16.jpg", "marble17.jpg", "marble18.jpg", "marble19.jpg", 
-            "granite1.jpg", "granite2.jpg", "granite3.jpg", "granite4.jpg", "granite5.jpg", "granite6.jpg", "granite7.jpg", "granite8.jpg", "granite9.jpg", "granite10.jpg", "granite11.jpg", "granite12.jpg"
-        ]
     },
     {
         id: 12,
@@ -152,7 +160,7 @@ const navMenu = document.querySelector('.nav-menu');
 
 // 初始化
 document.addEventListener('DOMContentLoaded', function() {
-    displayProducts('forklift');
+    displayProducts('marble');
     setupEventListeners();
     setupSmoothScrolling();
 });
