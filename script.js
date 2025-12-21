@@ -56,7 +56,7 @@ const products = [
         id: 19,
         name: "Brand new 3-ton forklift",
         description: "Brand new 3-ton forklift, commission 5000 ghc",
-        price: "$188000",
+        price: "188000 ghc",
         category: "forklift",
         images: ["newforklift30-1.jpg"]
     },
@@ -64,7 +64,7 @@ const products = [
         id: 20,
         name: "Brand new 3.5-ton forklift",
         description: "Brand new 3.5-ton forklift, commission 5000 ghc",
-        price: "$238000",
+        price: "238000 ghc",
         category: "forklift",
         images: ["newforklift35-1.jpg"]
     },
