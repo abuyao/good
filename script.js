@@ -25,7 +25,7 @@ const products = [
         description: "resin roof sheet, commission 0.45 us$/m, produced in Ghana ",
         price: "9usd/m",
         category: "resin",
-        images: ["resin3-1.jpg", "resin3-2.jpg", "resin3-3.jpg", "resin3-4.jpg", "resin3-5.jpg", "resin3-6.jpg", "resin3-7.jpg"]
+        images: ["resin3-1.jpg", "resin3-2.jpg", "resin3-3.jpg", "resin3-4.jpg", "resin3-5.jpg", "resin3-6.jpg", "resin3-7.jpg", "resin4-1.jpg", "resin4-2.jpg", "resin4-3.jpg", "resin4-4.jpg"]
     },
     {
         id: 1,
